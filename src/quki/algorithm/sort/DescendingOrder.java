@@ -2,34 +2,24 @@ package quki.algorithm.sort;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Scanner;
 
 public class DescendingOrder {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        Integer[] a = new Integer[n];
-        for(int i = 0; i<n;i++){
-            a[i] = sc.nextInt();
-        }
+        Integer[] a = new Integer[]{
+                5,3,7,1,9
+        };
+        
         Arrays.sort(a,new Comparator<Integer>() {
 
             @Override
             public int compare(Integer e1, Integer e2) {
-                if(e1<e2){
-                    return -1;
-                }else if(e1==e2){
-                    return 0;
-                }else{
-                    return 1;
-                }
+                return e2.compareTo(e1); // Descending order
             }
             
         });
-        for(int i = 0; i<n ; i++){
+        for(int i = 0; i<a.length ; i++){
             System.out.println(a[i]);
-            
         }
         
     }

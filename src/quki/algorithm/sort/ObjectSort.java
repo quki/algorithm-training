@@ -9,9 +9,19 @@ import java.util.Scanner;
 /**
  * Object sort using Comparator interface
  * (Ascending)
+ * BOJ #11650
  * @author quki
  *
  */
+/*
+ *INPUT !!
+ * 5
+3 4
+1 1
+1 -1
+2 2
+3 3
+*/
 public class ObjectSort {
 
     public static class Point {

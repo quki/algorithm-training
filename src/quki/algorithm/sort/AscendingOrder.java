@@ -1,21 +1,30 @@
 package quki.algorithm.sort;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
 
 public class AscendingOrder {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        ArrayList<Integer> al = new ArrayList<>();
+    public static void main(String[] args) throws IOException{
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int n = Integer.valueOf(br.readLine());
+        //ArrayList<Integer> al = new ArrayList<>();
+        int a[] = new int[n];
         for(int i = 0;i<n;i++){
-            al.add(sc.nextInt());
+            int e = Integer.valueOf(br.readLine());
+           // al.add(e);
+            a[i] = e;
         }
-        Collections.sort(al);
-        for( int e : al ){
-            System.out.println(e);
+        Arrays.sort(a);
+        for( int e : a ){
+            bw.write(e + "\n");
         }
+        bw.flush();
     }
 }

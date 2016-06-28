@@ -14,41 +14,37 @@ public class P1874 {
         for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
         }
-        int count = 0;
+        int max = 0;
         StringBuffer sb = new StringBuffer();
         boolean isExistAns = true;
         for (int i = 0; i < n; i++) {
             int v = a[i];
-            if (count < v) {
-                int input = count;
+            int last = 0;
+            if (!st.isEmpty())
+                last = st.peek();
+            
+            if (v > last) {
+                int input = max;
                 for (int j = input + 1; j <= v; j++) {
                     st.push(j);
-                    count++;
                     sb.append("+\n");
                 }
+                max = Math.max(max, v);
+                st.pop();
+                sb.append("-\n");
+            } else if (v == last) {
                 st.pop();
                 sb.append("-\n");
             } else {
-                int last = 0;
-                if (!st.isEmpty())
-                    last = st.peek();
-                if (last != v) {
-                    isExistAns = false;
-                    sb = null;
-                    break;
-                } else {
-                    st.pop();
-                    sb.append("-\n");
-                }
-
+                isExistAns = false;
+                break;
             }
         }
-        if(isExistAns){
+        if (isExistAns) {
             System.out.println(sb);
-        }else{
+        } else {
             System.out.println("NO");
         }
-        
 
     }
 

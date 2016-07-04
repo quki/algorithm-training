@@ -27,6 +27,8 @@ baesangwook
 ohhenrie
 clinton
 */
+
+// Map 은 entry를 이용해서, key와 value를 구분해준다.
 public class MyTreeMap {
 
     public static void main(String[] args) throws IOException{

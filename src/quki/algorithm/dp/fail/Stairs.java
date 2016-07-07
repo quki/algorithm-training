@@ -1,5 +1,5 @@
 
-package quki.algorithm.dp;
+package quki.algorithm.dp.fail;
 
 import java.util.Scanner;
 

@@ -27,9 +27,9 @@ public class BOJ10844 {
         }
         long ans = 0;
         for(int i = 0; i<=9; i++){
-            ans += d[N][i];
+            ans += d[N][i]% 1000000000;
         }
-        System.out.println(ans);
+        System.out.println(ans% 1000000000);  // MOD계산을 수시로!
     }
 
 }

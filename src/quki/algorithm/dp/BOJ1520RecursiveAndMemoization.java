@@ -3,7 +3,7 @@ package quki.algorithm.dp;
 
 import java.util.Scanner;
 
-public class BOJ1520Recursive {
+public class BOJ1520RecursiveAndMemoization {
 
     static int dx[] = {
             0, 0, 1, -1

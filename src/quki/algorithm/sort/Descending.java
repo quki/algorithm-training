@@ -3,7 +3,7 @@ package quki.algorithm.sort;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class DescendingOrder {
+public class Descending {
 
     public static void main(String[] args) {
         Integer[] a = new Integer[]{

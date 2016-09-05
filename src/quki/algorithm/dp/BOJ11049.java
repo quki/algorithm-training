@@ -15,7 +15,6 @@ public class BOJ11049 {
         if (i+1 == j) {
             return a[i][0]*a[i][1]*a[j][1];
         }
-        //d[i][j] = -1;
         for (int k=i; k<j; k++) {
             int t1 = go(a,d,i,k);
             int t2 = go(a,d,k+1,j);
@@ -36,7 +35,7 @@ public class BOJ11049 {
         }
         int[][]d = new int[n][n];
         for(int i = 0; i<n ; i++){
-            Arrays.fill(d[i], -1); //2차원 배열 d를 모두 -1로 채우는 과정, 재귀함수 내부에서 -1처리(주석)해줘도 무관함.
+            Arrays.fill(d[i], -1);
         }
         System.out.println(go(a,d,0,n-1));
     }

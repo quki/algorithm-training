@@ -30,8 +30,11 @@ public class BOJ11657 {
 		int n = sc.nextInt();
 		int m = sc.nextInt();
 		int d[] = new int[n + 1];
-		Edge edgeArr[] = new Edge[m + 1]; // Edge의 갯수만큼 초기화
-
+		
+		// ArrayList로 바꾸면 사실 더 쉬움
+		// Edge의 갯수만큼 초기화
+		Edge edgeArr[] = new Edge[m + 1]; 
+		
 		for (int i = 1; i <= m; i++) {
 			int a = sc.nextInt();
 			int b = sc.nextInt();
@@ -42,11 +45,14 @@ public class BOJ11657 {
 		Arrays.fill(d, inf);
 		d[1] = 0;
 		boolean isNegativeCycleExist = false;
+
 		// V만큼 for문 돌림, 음수 간선이 없다면 V-1만큼 돌려도 되지만,
 		// 음수 cycle이 있는 경우 마지막 V번째에 update가 이뤄지므로 V번까지 돌려야한다.
 		for (int i = 1; i <= n; i++) {
 			for (int j = 1; j <= m; j++) {
-				Edge e = edgeArr[j]; // 모든 Edge를 검사
+
+				// 모든 Edge를 검사!
+				Edge e = edgeArr[j];
 				int u = e.u;
 				int v = e.v;
 				int c = e.c;
@@ -61,13 +67,14 @@ public class BOJ11657 {
 			}
 		}
 
+		// 츨력이므로 별로 신경 안써도 됨
 		if (isNegativeCycleExist) {
 			System.out.println(-1);
 		} else {
 			for (int i = 2; i <= n; i++) {
-				if(d[i] == inf){
+				if (d[i] == inf) {
 					System.out.println(-1);
-				}else{
+				} else {
 					System.out.println(d[i]);
 				}
 			}

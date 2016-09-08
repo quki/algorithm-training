@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * 타임머신 문제 Bellman Ford
- * 
+ * SPFA로도 풀 수 있다.
  * 시간복잡도: VE, 그러나 E<=V^2 이기 때문에 일반적으로 V^3
  * 
  * @author quki

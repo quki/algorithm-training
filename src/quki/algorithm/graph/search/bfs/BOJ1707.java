@@ -12,7 +12,7 @@ import java.util.Scanner;
  * 
  * @author quki
  */
-public class BOJ1707BFS {
+public class BOJ1707 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * DP 2차원 배열
- * 1. mod 계산 주의 
+ * 1. MOD 계산 주의 
  * 2. 3중 for문 주의
  * 
  * @author quki
@@ -42,25 +42,25 @@ public class SCPC2 {
 				sum[1] = 1;
 			}
 
-			for (int n = 2; n <= N; n++) {
+			for (int i = 2; i <= N; i++) {
 
-				if (bomb[n])
+				if (bomb[i])
 					continue;
 
 				// 점화식
-				for (int k = 1; k <= K; k++) {
+				for (int m = 1; m <= K; m++) {
 
-					if (n - k > 0) {
-						d[n][k] = (sum[n - k] + mod - d[n - k][k]) % mod;
+					if (i - m > 0) {
+						d[i][m] = (sum[i - m] + mod - d[i - m][m]) % mod;
 					}
-					if (n == k) {
-						d[n][k] = 1;
+					if (i == m) {
+						d[i][m] = 1;
 					}
 				}
 
 				// sum 계산
-				for (int k = 1; k <= K; k++) {
-					sum[n] = (sum[n] + d[n][k]) % mod;
+				for (int m = 1; m <= K; m++) {
+					sum[i] = (sum[i] + d[i][m]) % mod;
 				}
 
 			}

@@ -45,7 +45,10 @@ public class P4 {
                 int c = sc.nextInt();
                 hm.get(u).add(new Point(v,c));
                 hm.get(v).add(new Point(u,c));
-                dtemp[u] = dtemp[u]+1;
+                
+             // 꼬리 카운트 시키는 거 같은데 
+             // 다익스트라, 플로이드와샬, SPFA, 벨만포드는 필요 없음!
+                dtemp[u] = dtemp[u]+1; 
                 dtemp[v] = dtemp[v]+1;
             }
             

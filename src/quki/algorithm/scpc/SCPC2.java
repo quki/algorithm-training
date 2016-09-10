@@ -41,7 +41,8 @@ public class SCPC2 {
 				d[1][1] = 1;
 				sum[1] = 1;
 			}
-
+			
+			// 메모이제이션
 			for (int i = 2; i <= N; i++) {
 
 				if (bomb[i])

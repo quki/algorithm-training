@@ -6,7 +6,13 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
-
+/**
+ * SPFA로 풀긴했다만 왜 시간초과가 나는지 모르겠음
+ * 그리고 Queue에 들어있는 친구를 다시 Queue에 넣으면 느리지 않나?
+ * 
+ * @author quki
+ *
+ */
 public class SCPC4 {
 
 	public static class Edge {

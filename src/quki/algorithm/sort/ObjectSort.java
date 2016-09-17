@@ -9,7 +9,10 @@ import java.util.Scanner;
 /**
  * Object sort using Comparator interface
  * (Ascending)
+ * Collectios, Arrays 모두 가능
  * BOJ #11650
+ * 
+ * 
  * @author quki
  *
  */
@@ -26,7 +29,6 @@ public class ObjectSort {
 
     public static class Point {
         int x;
-
         int y;
 
         Point(int x, int y) {
@@ -38,10 +40,12 @@ public class ObjectSort {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        ArrayList<Point> al = new ArrayList<>();
+        ArrayList<Point> al = new ArrayList<>(); 
         while (n-- > 0) {
             al.add(new Point(sc.nextInt(), sc.nextInt()));
         }
+        
+        // Arrays.sort도 가능
         Collections.sort(al, new Comparator<Point>() {
 
             @Override

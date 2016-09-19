@@ -33,8 +33,8 @@ public class P3 {
                 int v = sc.nextInt();
                 hm.get(u).add(v);
                 hm.get(v).add(u);
-                d[u] = d[u] + 1;
-                d[v] = d[v] + 1;
+                d[u]++;
+                d[v]++;
             }
             boolean isAnsExist = true;
             boolean isKChanged = true;

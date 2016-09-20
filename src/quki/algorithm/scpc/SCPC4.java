@@ -1,13 +1,13 @@
 package quki.algorithm.scpc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+
 /**
- * SPFA로 풀긴했다만 왜 시간초과가 나는지 모르겠음
+ * SPFA로 풀긴했다만 왜 시간초과가 나는지 모르겠음 
  * 그리고 Queue에 들어있는 친구를 다시 Queue에 넣으면 느리지 않나?
  * 
  * @author quki
@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class SCPC4 {
 
-	public static class Edge {
+	static class Edge {
 		int v;
 		int c;
 
@@ -25,55 +25,62 @@ public class SCPC4 {
 		}
 	}
 
+	static final int INF = 1000000000;
+
 	public static void main(String args[]) throws Exception {
 		Scanner sc = new Scanner(System.in);
 
 		int T;
 		int test_case;
-		int inf = 1000000000;
 		T = sc.nextInt();
 		for (test_case = 1; test_case <= T; test_case++) {
 			int N = sc.nextInt();
 			int M = sc.nextInt();
 			int K = sc.nextInt();
 			int d[][] = new int[N + 1][2]; // 0: 최단거리, 1: 가장가까운 대피소
-
-			HashMap<Integer, ArrayList<Edge>> hm = new HashMap<>();
-			for (int i = 0; i <= N; i++) {
-				hm.put(i, new ArrayList<Edge>());
-				Arrays.fill(d[i], inf);
+			
+			HashMap<Integer, ArrayList<Edge>> graph = new HashMap<>();
+			for (int i = 1; i <= N; i++) {
+				graph.put(i, new ArrayList<Edge>());
+				d[i][0] = INF;
 			}
 			while (M-- > 0) {
 				int u = sc.nextInt();
 				int v = sc.nextInt();
 				int c = sc.nextInt();
-				hm.get(u).add(new Edge(v, c));
-				hm.get(v).add(new Edge(u, c));
+				graph.get(u).add(new Edge(v, c));
+				graph.get(v).add(new Edge(u, c));
 			}
-			Queue<Integer> q = new LinkedList<Integer>();
+			Queue<Integer> q = new LinkedList<>();
+			boolean isInQueue[] = new boolean[N + 1];
+			boolean isP[] = new boolean[N+1];
 			while (K-- > 0) {
 				int p = sc.nextInt();
 				d[p][0] = 0;
 				d[p][1] = p;
 				q.add(p);
+				isInQueue[p] = true;
+				isP[p] = true;
 			}
 
 			while (!q.isEmpty()) {
 				int u = q.poll();
-
-				for (Edge edge : hm.get(u)) {
+				isInQueue[u] = false;
+				for (Edge edge : graph.get(u)) {
 					int v = edge.v;
 					int c = edge.c;
-
-					if (d[v][0] >= d[u][0] + c) {
+					
+					if(isP[v])
+						continue;
+					
+					if (d[v][0] > d[u][0] + c) {
 						d[v][0] = d[u][0] + c;
 						d[v][1] = d[u][1];
-						if (d[v][0] == d[u][0] + c && d[v][1] > d[u][1]) {
-							d[v][1] = d[u][1];
-						}
+						if (!isInQueue[v])
+							q.add(v);
 
-						q.add(v);
-
+					} else if (d[v][0] == d[u][0] + c && d[v][1] > d[u][1]) {
+						d[v][1] = d[u][1];
 					}
 
 				}

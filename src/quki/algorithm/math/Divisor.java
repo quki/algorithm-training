@@ -1,35 +1,29 @@
 
 package quki.algorithm.math;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class Divisor {
 
-    public static ArrayList<Integer> getDivisor(int n) {
-        ArrayList<Integer> al = new ArrayList<>();
-        for(int i = 1; i*i<=n;i++){
-            if(n % i == 0){
-                al.add(i);
-                if(i*i != n)
-                al.add(n/i);
-            }
-        }
-        return al;
-    }
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int input = sc.nextInt();
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int k = sc.nextInt();
-        ArrayList<Integer> result = getDivisor(n);
-        Collections.sort(result);
-        if(k > result.size()){
-            System.out.println(0);
-        }else{
-            System.out.println(result.get(k-1));
-        }
-        
-    }
+		TreeSet<Integer> ts = new TreeSet<>();
+
+		for (int i = 1; i * i <= input; i++) {
+			if (input % i == 0) {
+				ts.add(i);
+				ts.add(input / i);
+			}
+		}
+		StringBuilder ans = new StringBuilder();
+		for (int e : ts) {
+			ans.append(e);
+			ans.append(" ");
+		}
+		System.out.println(ans);
+
+	}
 }

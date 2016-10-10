@@ -4,7 +4,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
-
+/**
+ * DSLR
+ * 
+ * @author quki
+ *
+ */
 public class BOJ9019 {
 
 	public static final int MOD = 10000;

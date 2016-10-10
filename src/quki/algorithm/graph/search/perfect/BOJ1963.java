@@ -20,13 +20,14 @@ public class BOJ1963 {
 		}
 		String strOrigin = Integer.toString(origin);
 		StringBuilder sb = new StringBuilder(strOrigin);
-		sb.setCharAt(index, (char) (digit + '0'));
+		sb.setCharAt(index, (char) (digit + '0')); // digit set하는 중요한 함수!
 		return Integer.parseInt(sb.toString());
 	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
+		// 에라토스테네스의 채
 		boolean[] prime = new boolean[10001];
 		Arrays.fill(prime, true);
 		for (int i = 2; i <= 10000; i++) {

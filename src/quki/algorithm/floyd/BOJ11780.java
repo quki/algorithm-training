@@ -4,8 +4,7 @@ import java.util.Scanner;
 /**
  * 
  * 경로 찍어내는 문제
- * Divide!
- * Conquer 라고 할 수 있나? OK!
+ * Divide Conquer 라고 할 수 있나? OK!
  * 
  * 플로이드 와샬문제는 동적계획법이다!
  * https://ko.wikipedia.org/wiki/%ED%94%8C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%9B%8C%EC%85%9C_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98
@@ -16,14 +15,14 @@ import java.util.Scanner;
 public class BOJ11780 {
 
 	// Divide and Conquer 방식을 이용
-	public static String getPath(int u, int v, int path[][]) {
+	public static String getPath(int i, int j, int path[][]) {
 		
-		if (path[u][v] == u)
-			return " "+v;
+		if (path[i][j] == 0)
+			return i+" ";
 		
-		int k = path[u][v];
-		String front = getPath(u, k, path);
-		String back = getPath(k, v, path);
+		int k = path[i][j];
+		String front = getPath(i, k, path);
+		String back = getPath(k, j, path);
 		return front + back;
 
 	}
@@ -45,11 +44,7 @@ public class BOJ11780 {
 		// int parent[] = new int[n+1];
 		// 일차원 배열은 single start single end일 때나 가능
 		int path[][] = new int[n + 1][n + 1];
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= n; j++) {
-				path[i][j] = i; // 출발 점으로 초기화
-			}
-		}
+		
 		for (int k = 1; k <= n; k++) {
 			for (int i = 1; i <= n; i++) {
 				for (int j = 1; j <= n; j++) {
@@ -70,20 +65,17 @@ public class BOJ11780 {
 			}
 			ans.append("\n");
 		}
-		StringBuffer temp; 
 		for (int i = 1; i <= n; i++) {
 			for (int j = 1; j <= n; j++) {
-				temp = new StringBuffer();
 				if(i == j){
-					temp.append(0);
+					ans.append(0);
 				}else{
-					temp.append(i);
-					temp.append(getPath(i, j, path));
-					String line[] = temp.toString().split(" ");
+					String pathStr = getPath(i, j, path)+ j;
+					String line[] = pathStr.split(" ");
 					ans.append(line.length);
 					ans.append(" ");
+					ans.append(pathStr);
 				}
-				ans.append(temp.toString());
 				ans.append("\n");
 			}
 			

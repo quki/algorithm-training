@@ -2,6 +2,7 @@ package quki.algorithm.floyd;
 
 import java.util.Scanner;
 /**
+ * 케빈베이컨의 법칙
  * BFS로도 풀 수 있음
  * 
  * @author quki

@@ -2,7 +2,12 @@ package quki.algorithm.dp;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
+/**
+ * DP + Divide and conquer
+ * 
+ * @author quki
+ *
+ */
 public class BOJ11049 {
 
     public static int go(int[][] a, int[][] d, int i, int j) {

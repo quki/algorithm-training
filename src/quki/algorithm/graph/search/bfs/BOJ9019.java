@@ -1,4 +1,4 @@
-package quki.algorithm.graph.search.perfect;
+package quki.algorithm.graph.search.bfs;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -21,13 +21,13 @@ public class BOJ9019 {
 			int A = sc.nextInt();
 			int B = sc.nextInt();
 
-			int[] depth = new int[10000];
+			boolean[] check= new boolean[10000];
 			char[] fromCmd = new char[10000];
 			int[] from = new int[10000];
 
 			Queue<Integer> q = new LinkedList<>();
 			q.add(A);
-
+			check[A] = true;
 			while (!q.isEmpty()) {
 				int now = q.remove();
 				if (now == B)
@@ -38,11 +38,11 @@ public class BOJ9019 {
 				// D
 				next = 2 * now % MOD;
 
-				if (depth[next] == 0 || depth[now] + 1 < depth[next]) {
+				if (!check[next]) {
 					q.add(next);
 					fromCmd[next] = 'D';
 					from[next] = now;
-					depth[next] = depth[now] + 1;
+					check[next] = true;
 				}
 
 				// S
@@ -51,29 +51,29 @@ public class BOJ9019 {
 					next = 9999;
 				}
 
-				if (depth[next] == 0 || depth[now] + 1 < depth[next]) {
+				if (!check[next]) {
 					q.add(next);
 					fromCmd[next] = 'S';
 					from[next] = now;
-					depth[next] = depth[now] + 1;
+					check[next] = true;
 				}
 
 				// L
 				next = (now / 1000) + (now % 1000) * 10;
-				if (depth[next] == 0 || depth[now] + 1 < depth[next]) {
+				if (!check[next]) {
 					q.add(next);
 					fromCmd[next] = 'L';
 					from[next] = now;
-					depth[next] = depth[now] + 1;
+					check[next] = true;
 				}
 
 				// R
 				next = (now / 10) + (now % 10) * 1000;
-				if (depth[next] == 0 || depth[now] + 1 < depth[next]) {
+				if (!check[next]) {
 					q.add(next);
 					fromCmd[next] = 'R';
 					from[next] = now;
-					depth[next] = depth[now] + 1;
+					check[next] = true;
 				}
 
 			}

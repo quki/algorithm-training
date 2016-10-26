@@ -108,6 +108,7 @@ public class BinarySearchTree {
 				parent.setRight(replacingNode);
 			}
 			
+			// sub tree 달아주기
 			replacingNode.setLeft(current.getLeft());
 			replacingNode.setRight(current.getRight());
 			

@@ -9,7 +9,7 @@ public class BinarySearchTree {
 	}
 
 	/**
-	 * 탐색
+	 * 탐색 root node 부터
 	 */
 	public boolean find(int toFind) {
 		Node current = root; // current와 root는 같은 곳을 보고있음
@@ -29,7 +29,7 @@ public class BinarySearchTree {
 	}
 
 	/**
-	 * 삽입
+	 * 삽입 탐색과정과 유사
 	 */
 	public void insert(int data) {
 		Node newNode = new Node(data);
@@ -38,20 +38,19 @@ public class BinarySearchTree {
 			return;
 		}
 		Node current = root; // 시작!
-		Node parent = null; // 중요! java에서 reference
+		Node parent = null;
 		while (true) {
-			parent = current; // current가 가리키는 것을 parent도 가리킴, 이따가 current는 다른 것을 가리킴
+			parent = current;
 			if (data < current.getData()) {
-				current = current.getLeft(); // current만 child를 가리킴
+				current = current.getLeft();
 				if (current == null) {
-					parent.setLeft(newNode); // parent가 가리키는 객체에 setLeft!, 즉,
-												// root도 처음에 update
+					parent.setLeft(newNode); // parent에 set
 					return;
 				}
 			} else {
 				current = current.getRight();
 				if (current == null) {
-					parent.setRight(newNode);
+					parent.setRight(newNode); // parent에 set
 					return;
 				}
 			}
@@ -66,9 +65,10 @@ public class BinarySearchTree {
 		Node parent = null;
 
 		if (!find(toBeRemoved)) {
-			System.out.println("그런 원소 없습니다");
+			System.out.println("해당 원소 없습니다");
 		}
 
+		// 삭제되는 node(current)가 부모입장에서 왼쪽자식인지 check!
 		boolean isLeftChild = false; // 지워져야하는 node가 부모에 대해 왼쪽에 있는가
 		while (current.getData() != toBeRemoved) {
 			parent = current; // 부모 update!
@@ -84,7 +84,7 @@ public class BinarySearchTree {
 
 		}
 
-			// 1. sub tree가 하나도 없는 경우
+		// 1. sub tree가 하나도 없는 경우
 		if (current.getLeft() == null && current.getRight() == null) {
 
 			if (current == root)
@@ -98,7 +98,7 @@ public class BinarySearchTree {
 
 			// 2. sub tree가 둘다 있는 경우
 		} else if (current.getLeft() != null && current.getRight() != null) {
-			
+
 			Node replacingNode = getReplaceNode(current);
 			if (current == root) { // root인 경우
 				root = replacingNode;
@@ -107,11 +107,11 @@ public class BinarySearchTree {
 			} else {
 				parent.setRight(replacingNode);
 			}
-			
+
 			// sub tree 달아주기
 			replacingNode.setLeft(current.getLeft());
 			replacingNode.setRight(current.getRight());
-			
+
 			// 3. sub tree가 하나만 있는 경우
 		} else if (current.getLeft() != null) {
 
@@ -135,24 +135,24 @@ public class BinarySearchTree {
 		}
 		return current;
 	}
+
 	/**
-	 * 지워지는 node의 오른쪽에 있는 가장 작은 값을 찾는다
-	 * 열혈 자료구조 책 참고
+	 * 지워지는 node의 오른쪽에 있는 가장 작은 값을 찾는다 열혈 자료구조 책 참고
 	 */
-	private Node getReplaceNode(Node current){
+	private Node getReplaceNode(Node current) {
 		Node parent = null;
 		current = current.getRight();
-		while(current != null){
+		while (current != null) {
 			parent = current;
 			current = current.getLeft();
 		}
-		
-		//  parent의 parent의 left 삭제하는 부분 구현해라!
+
+		// parent의 parent의 left 삭제하는 부분 구현해라!
 		return parent;
 	}
+
 	/**
-	 * 순회 (Traverse) 
-	 * 왼쪽에서부터 순회
+	 * 순회 (Traverse) 중위 순회
 	 */
 	private void inorder(Node node) {
 		if (node != null) {
@@ -168,8 +168,7 @@ public class BinarySearchTree {
 	}
 
 	/**
-	 * getter, setter
-	 *
+	 * Node getter, setter
 	 */
 	public class Node {
 		private int data;

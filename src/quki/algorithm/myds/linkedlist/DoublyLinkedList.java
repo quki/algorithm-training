@@ -1,7 +1,12 @@
 package quki.algorithm.myds.linkedlist;
-
-public class LinkedList {
-
+/**
+ * https://opentutorials.org/module/1335/8941
+ * Iterator 참고
+ * 
+ * @author quki
+ *
+ */
+public class DoublyLinkedList {
 	private Node head;
 	private Node tail;
 	private int size = 0;
@@ -14,6 +19,10 @@ public class LinkedList {
 	public void addFirst(Object input) {
 		Node newNode = new Node(input);
 		newNode.next = head; // 이전에 만들어진 node를 가리켜야함, 정보는 head에 담겨있다
+
+		if (head != null)
+			head.prev = newNode;
+
 		head = newNode; // head 변수가 새로 만들어진 node를 가리킴
 		size++;
 		if (head.next == null) { // head.next는 head 변수가 가리키고 있는 node의 다음 node
@@ -32,6 +41,7 @@ public class LinkedList {
 			addFirst(input);
 		} else {
 			tail.next = newNode;
+			newNode.prev = tail;
 			tail = newNode;
 			size++;
 		}
@@ -39,19 +49,21 @@ public class LinkedList {
 
 	/**
 	 * 특정 index에 node 추가
-	 * 
-	 * @param index
-	 * @param input
 	 */
 	public void add(int index, Object input) {
 
 		if (index == 0) {
 			addFirst(input);
 		} else {
-			Node prev = getNode(index - 1);
+			Node prevNode = getNode(index - 1);
 			Node newNode = new Node(input);
-			newNode.next = prev.next;
-			prev.next = newNode;
+
+			newNode.next = prevNode.next;
+			prevNode.next.prev = newNode;
+
+			prevNode.next = newNode;
+			newNode.prev = prevNode;
+
 			size++;
 
 			if (newNode.next == null) { // 마지막에 추가된다면, tail 갱신
@@ -70,6 +82,7 @@ public class LinkedList {
 		Node tobeRemoved = head;
 		Object returnData = tobeRemoved.data;
 		head = tobeRemoved.next;
+		head.prev = null; // head 변수가 가리키는 node, 
 		tobeRemoved = null;
 		size--;
 		return returnData;
@@ -85,18 +98,20 @@ public class LinkedList {
 		if (index == 0)
 			return removeFirst();
 
-		Node prev = getNode(index - 1); // 지워져야하는 앞의 node
-		Node tobeRemoved = prev.next; // 지워져야하는 node를 가리키고있다
+		Node prevNode = getNode(index - 1); // 지워져야하는 앞의 node
+		Node tobeRemoved = prevNode.next; // 지워져야하는 node를 가리키고있다
 		Object returnData = tobeRemoved.data; // data 저장
-		prev.next = tobeRemoved.next;
+		
+		prevNode.next = tobeRemoved.next;
+		tobeRemoved.next.prev = prevNode;
 
 		// 변수가 가리키고 있던 instance의 주소값이 없으므로
 		// Garbage collector가 instance 회수
 		tobeRemoved = null;
 
 		size--;
-		if (prev.next == null)
-			tail = prev;
+		if (prevNode.next == null)
+			tail = prevNode;
 
 		return returnData;
 	}
@@ -120,16 +135,20 @@ public class LinkedList {
 	}
 
 	/**
-	 * 특정 index의 node 찾기. 차례로 검사해야하므로 마지막 node에 접근하면 최악의 경우. 내부에서 쓰는 Node 객체를
-	 * 외부에 보여서는 안됨.
-	 * 
-	 * @param index
-	 * @return
+	 * 특정 index의 node 찾기. size / 2를 기준으로
 	 */
 	private Node getNode(int index) {
-		Node temp = head;
-		for (int i = 0; i < index; i++) {
-			temp = temp.next;
+		Node temp;
+		if (index < size / 2) {
+			temp = head;
+			for (int i = 0; i < index; i++) {
+				temp = temp.next;
+			}
+		} else {
+			temp = tail;
+			for (int i = size - 1; i > index; i--) {
+				temp = temp.prev;
+			}
 		}
 		return temp;
 	}
@@ -157,15 +176,16 @@ public class LinkedList {
 
 	/**
 	 * 내부에서 만든 class는 통상적으로 외부에서 보이면 안됨.
-	 *
 	 */
 	private class Node {
 
 		private Object data;
+		private Node prev;
 		private Node next;
 
 		Node(Object input) {
 			this.data = input;
+			this.prev = null;
 			this.next = null;
 		}
 
@@ -175,5 +195,4 @@ public class LinkedList {
 		}
 
 	}
-
 }

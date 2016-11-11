@@ -1,5 +1,5 @@
 
-package quki.algorithm.kmp;
+package quki.algorithm.string;
 
 import java.util.Scanner;
 

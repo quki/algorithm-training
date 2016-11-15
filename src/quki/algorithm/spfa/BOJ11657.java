@@ -48,7 +48,8 @@ public class BOJ11657 {
 		boolean isExistInQueue[] = new boolean[n + 1];
 
 		// update되는 횟수 count
-		int cycle[] = new int[n + 1];
+		// 사이클이 없다면 본인 이외의 모든 정점 n-1개에서 update해봐야 최대 n-1개이기 때문
+		int cycle[] = new int[n + 1]; 
 		
 		Queue<Integer> q = new LinkedList<>();
 		q.add(1);

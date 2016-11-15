@@ -122,9 +122,6 @@ public class LinkedList {
 	/**
 	 * 특정 index의 node 찾기. 차례로 검사해야하므로 마지막 node에 접근하면 최악의 경우. 내부에서 쓰는 Node 객체를
 	 * 외부에 보여서는 안됨.
-	 * 
-	 * @param index
-	 * @return
 	 */
 	private Node getNode(int index) {
 		Node temp = head;
